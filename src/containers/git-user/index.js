@@ -5,24 +5,27 @@ import ReposTable from './table';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
-  getUser
+  getUserDetails,
+  getRepos
 } from '../../modules/git-user';
 
 const mapStateToProps = state => ({
-  user: state.git.user
-})
+  user: state.git.user,
+  repos: state.git.repos
+});
 
 
 const GitUser = (props) => (
   <div className="users-container">
-    <Search textInput={props.textInput} getUser={props.getUser} />
-    { Object.keys(props.user.details).length ? <Details {...props.user.details} />: null }
-    { props.user.repos.length?<ReposTable repos = {props.user.repos} />: null}
+    <Search textInput={props.textInput} getUser={props.getUserDetails} />
+    { Object.keys(props.user).length ? <Details {...props.user} />: null }
+    <ReposTable getRepos={props.getRepos} repos={props.repos} />
   </div>
 );
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getUser
+  getUserDetails,
+  getRepos
 }, dispatch)
 
 export default connect(

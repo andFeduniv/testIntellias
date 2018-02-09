@@ -1,36 +1,40 @@
+import User from '../services/git-user'
+
 export const RECEIVE_USER = 'counter/RECEIVE_USER';
+export const RECEIVE_REPOS = 'counter/RECEIVE_REPOS';
 
 const initialState = {
-  user: {
-    details: {},
-    repos: []
-  },
+  user: {},
+  repos: [],
+  inputValue: ''
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_USER:
-      return action.payload;
+      return Object.assign({}, state, action.payload);
+    case RECEIVE_REPOS:
+      return Object.assign({}, state, action.payload);
 
     default:
       return state
   }
 }
 
-export const getUser = (userName) => dispatch => {
-  let baseUrl = 'https://api.github.com/users/';
-  let userDetailsUrl = `${baseUrl}${userName}`;
-  let userReposUrl = `${baseUrl}${userName}/repos`;
-  let getUserDetail = fetch(userDetailsUrl);
-  let getUserRepos = fetch(userReposUrl);
-  return Promise.all([ getUserDetail, getUserRepos ])
-    .then(data => { data[0].json().then(details => data[1].json().then(repos => {
-        details = details.message ? {} : details; // TODO: add error handling
-        repos = repos.message ? [] : repos;
-        dispatch({
-          type: RECEIVE_USER,
-          payload: { user: { details, repos } }
-        })
-      }))
+export const getUserDetails = (userName) => dispatch => {
+  User.getUser(userName, user => {
+    dispatch({
+      type: RECEIVE_USER,
+      payload: { user, inputValue: userName }
     })
+  });
+}
+
+export const getRepos = () => (dispatch, getState) => {
+  User.getUserRepos(getState().inputValue, repos => {
+    dispatch({
+      type: RECEIVE_REPOS,
+      payload: { repos }
+    })
+  });
 }
