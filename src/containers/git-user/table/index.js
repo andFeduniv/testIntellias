@@ -30,10 +30,13 @@ class ReposTable extends React.Component {
       }
     ];
 
-    return <ReactTable
+    return <div>
+      <h3>Repos table:</h3>
+      <ReactTable
       data={data}
       columns={columns}
-    />
+      />
+    </div>
   }
 }
 
