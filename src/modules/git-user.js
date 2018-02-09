@@ -25,13 +25,13 @@ export const getUserDetails = (userName) => dispatch => {
   User.getUser(userName, user => {
     dispatch({
       type: RECEIVE_USER,
-      payload: { user, inputValue: userName }
+      payload: { user, repos: [], inputValue: userName }
     })
   });
 }
 
 export const getRepos = () => (dispatch, getState) => {
-  User.getUserRepos(getState().inputValue, repos => {
+  User.getUserRepos(getState().git.inputValue, repos => {
     dispatch({
       type: RECEIVE_REPOS,
       payload: { repos }
