@@ -9,6 +9,7 @@ const Details = (props) => (
     <p>Folowers: {props.name}</p>
     <p>Updated_at: {props.updated_at}</p>
     <p>Avatar: {props.avatar_url}</p>
+    <a href="javascript:void(0)" onClick={props.getRepos} >Repos</a>
   </div>
 );
 

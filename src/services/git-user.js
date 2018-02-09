@@ -5,7 +5,7 @@ class GitUser {
     let userDetailsUrl = `${apiUrl}${userName}`;
     fetch(userDetailsUrl).then(data => {
       if (data.status !== 200) {
-        alert('Error');
+         cb({});
       } else {
         data.json().then(res => cb(res))
       }
@@ -16,7 +16,7 @@ class GitUser {
     let userReposUrl = `${apiUrl}${userName}/repos`;
     fetch(userReposUrl).then(data => {
       if (data.status !== 200) {
-        alert('Error');
+        cb([]);
       } else {
         data.json().then(res => cb(res))
       }

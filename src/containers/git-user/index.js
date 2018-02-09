@@ -18,8 +18,8 @@ const mapStateToProps = state => ({
 const GitUser = (props) => (
   <div className="users-container">
     <Search textInput={props.textInput} getUser={props.getUserDetails} />
-    { Object.keys(props.user).length ? <Details {...props.user} />: null }
-    <ReposTable getRepos={props.getRepos} repos={props.repos} />
+    { Object.keys(props.user).length ? <Details {...props.user} getRepos={props.getRepos} />: null }
+    <ReposTable repos={props.repos} />
   </div>
 );
 

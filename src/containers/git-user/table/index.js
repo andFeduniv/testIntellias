@@ -31,7 +31,6 @@ class ReposTable extends React.Component {
     ];
 
     return <div>
-      <a href="javascript:void(0)" onClick={this.props.getRepos} >Repos</a>
       { data.length ? <ReactTable data={data} columns={columns} /> : null }
       </div>
   }
