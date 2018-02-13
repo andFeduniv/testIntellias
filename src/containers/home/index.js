@@ -1,6 +1,6 @@
 import React from 'react';
 import GitUser from '../git-user'
-import './home.css';
+import './home.scss';
 
 class Home extends React.Component {
   render() {
